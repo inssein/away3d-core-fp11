@@ -695,8 +695,11 @@ package away3d.loaders.parsers
 			if(diffuse && diffuse.texture && effect.surface) {
 				var image:DAEImage = _libImages[effect.surface.init_from];
 				
-				if (isBitmapDataValid(image.resource.bitmapData))
+				if (image.resource !== null && isBitmapDataValid(image.resource.bitmapData)) {
 					mat = textureMaterial = buildDefaultMaterial(image.resource.bitmapData);
+				} else {
+					mat = textureMaterial = buildDefaultMaterial();
+				}
 				
 			} else if (diffuse && diffuse.color) {
 				mat = textureMaterial = buildDefaultMaterial();
